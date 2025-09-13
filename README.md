@@ -1,1 +1,2 @@
 To get workflow running , clone this respository to your local machine: git clone. https://github.com/FullhouseHorus/Da-All-Seeing-Affiliate.git This workflow requires a specific version of Node.js.Make sure you have it installed before proceeding. The workflow can be run with the following command: npm run start this will run the workflow to
+chat gpt fix it 
