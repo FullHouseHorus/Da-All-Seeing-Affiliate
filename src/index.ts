@@ -7,6 +7,12 @@ import authRoutes from "./routes/auth";
 import linksRoutes from "./routes/links";
 import commissionsRoutes from "./routes/commissions";
 import redirectRoutes from "./routes/redirect";
+import productsRoutes from "./routes/products";
+import discountsRoutes from "./routes/discounts";
+import socialRoutes from "./routes/social";
+
+// Import scheduler
+import { SocialMediaScheduler } from "./scheduler/socialMediaScheduler";
 
 // Load environment variables
 dotenv.config();
@@ -33,14 +39,28 @@ app.use((req, res, next) => {
 
 // Health check endpoint
 app.get("/health", (req, res) => {
-  res.json({ status: "ok", message: "Da-All-Seeing-Affiliate API is running" });
+  const schedulerStatus = SocialMediaScheduler.getStatus();
+  res.json({
+    status: "ok",
+    message: "Da-All-Seeing-Affiliate API is running",
+    scheduler: schedulerStatus,
+    timestamp: new Date(),
+  });
 });
 
 // API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/links", linksRoutes);
 app.use("/api/commissions", commissionsRoutes);
+app.use("/api/products", productsRoutes);
+app.use("/api/discounts", discountsRoutes);
+app.use("/api/social", socialRoutes);
 app.use("/go", redirectRoutes);
+
+// Scheduler status
+app.get("/scheduler/status", (req, res) => {
+  res.json(SocialMediaScheduler.getStatus());
+});
 
 // Error handling middleware
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -68,11 +88,20 @@ const startServer = async () => {
   try {
     await connectDB();
 
+    // Initialize schedulers
+    SocialMediaScheduler.initializeScheduler();
+
     app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
-      console.log(`📊 Health check: http://localhost:${PORT}/health`);
-      console.log(`🔗 API Base URL: http://localhost:${PORT}/api`);
-      console.log(`💰 Earnings Tracking: http://localhost:${PORT}/api/commissions/earnings`);
+      console.log(`\n🚀 DA-ALL-SEEING-AFFILIATE - RUNNING 24/7\n`);
+      console.log(`📊 API Base URL: http://localhost:${PORT}/api`);
+      console.log(`💰 Affiliate Links: http://localhost:${PORT}/api/links`);
+      console.log(`🎁 Discount Links: http://localhost:${PORT}/api/discounts`);
+      console.log(`📋 Products: http://localhost:${PORT}/api/products`);
+      console.log(`💳 Commission Tracking: http://localhost:${PORT}/api/commissions/earnings`);
+      console.log(`📱 Social Media Auto-Post: http://localhost:${PORT}/api/social`);
+      console.log(`\n📄 Schedule Status: http://localhost:${PORT}/scheduler/status`);
+      console.log(`\n🌟 Active Hours: 4:00 AM - 11:59 PM (20 hours/day)");
+      console.log(`😴 Maintenance: 12:00 AM - 3:59 AM\n`);
     });
   } catch (error) {
     console.error("Failed to start server:", error);
