@@ -1,0 +1,68 @@
+name: Da-All-Seeing-v2
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  full_affiliate_system:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Start Da-All-Seeing v2
+        run: echo "Starting Da-All-Seeing v2 Engine for Printful Antonio's Store..."
+
+      - name: Payment Block
+        run: |
+          echo "💳 PAYMENT OPTIONS"
+          echo "Cash App: https://cash.app/$YourTag"
+          echo "Apple Pay: Send to your business email/phone"
+
+      - name: Product Description
+        run: |
+          echo "🔥 PRODUCT DESCRIPTION"
+          echo "Printful Antonio's Store — premium merch, fast shipping, clean designs."
+          echo "High-quality hoodies, tees, hats, mugs, posters, and custom merch."
+
+      - name: Social Hooks
+        run: |
+          echo "🔥 SOCIAL HOOKS"
+          echo "This side hustle prints money."
+          echo "People are sleeping on this."
+          echo "Watch how fast this works."
+
+      - name: Viral Captions
+        run: |
+          echo "📝 VIRAL CAPTIONS"
+          echo "I made my first sale in under 24 hours. DM 'READY'."
+          echo "Printful Antonio's Store is live — limited drops."
+
+      - name: Hashtags
+        run: |
+          echo "🏷️ HASHTAGS"
+          echo "#cashapp #applepay #printful #antoniosstore #sidehustle #viralproducts #makemoneyonline"
+
+      - name: CTA
+        run: |
+          echo "📣 CTA"
+          echo "DM 'INFO' for the link + instant delivery."
+          echo "DM 'READY' to start."
+
+      - name: DM Funnel
+        run: |
+          echo "💬 DM FUNNEL"
+          echo "Hey! I can send it instantly. Cash App or Apple Pay. Want the link?"
+          echo "Payment confirmed — here’s your digital product."
+          echo "Want the posting system too?"
+
+      - name: Traffic Boosters
+        run: |
+          echo "🚀 TRAFFIC BOOSTERS"
+          echo "DM me 'INFO'"
+          echo "DM me 'READY'"
+          echo "Instant delivery"
+          echo "Cash App + Apple Pay"
+
+      - name: Engine Complete
+        run: echo "Da-All-Seeing v2 Engine Complete for Printful Antonio's Store."
